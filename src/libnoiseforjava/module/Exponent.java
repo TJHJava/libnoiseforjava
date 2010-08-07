@@ -71,4 +71,9 @@ public class Exponent extends ModuleBase
       return exponent;
    }
 
+   public void setExponent(double exponent)
+   {
+      this.exponent = exponent;
+   }
+
 }
