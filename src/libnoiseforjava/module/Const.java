@@ -57,7 +57,7 @@ public class Const extends ModuleBase
    /// Sets the constant output value for this noise module.
    ///
    /// @param constValue The constant output value for this noise module.
-   void setConstValue (double constValue)
+   public void setConstValue (double constValue)
    {
       this.constValue = constValue;
    }
