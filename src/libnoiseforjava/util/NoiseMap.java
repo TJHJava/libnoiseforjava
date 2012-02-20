@@ -51,7 +51,7 @@ public class NoiseMap
    int width;
 
    /// The array of doubles holding the noise map values
-   double [] [] noiseMap;
+   double[][] noiseMap;
 
    double borderValue;
 
@@ -146,5 +146,13 @@ public class NoiseMap
    {
       this.borderValue = borderValue;
    }
+
+    public double[][] getNoiseMap() {
+        return noiseMap;
+    }
+
+    public void setNoiseMap(double[][] noiseMap) {
+        this.noiseMap = noiseMap;
+    }
 
 }

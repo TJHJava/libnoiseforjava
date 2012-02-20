@@ -48,6 +48,11 @@ public class Const extends ModuleBase
       super(0);
       this.constValue = DEFAULT_CONST_VALUE;
    }
+    
+   public Const(double c) {
+       super(0);
+       this.constValue = c;
+   }
 
    public double getValue (double x, double y, double z)
    {
