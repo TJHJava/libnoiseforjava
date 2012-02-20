@@ -61,15 +61,12 @@ public class Gradient extends ModuleBase {
     public double getValue(double x, double y, double z) {
         if (axis == AXIS.Y) {
             double outy = scale(y, this.inputMin, this.inputMax, this.scaledMin, this.scaledMax);
-            System.out.println("y/outy " + y + "/" + outy);
             return outy;
         } else if (axis == AXIS.X) {
             double outx = scale(x, this.inputMin, this.inputMax, this.scaledMin, this.scaledMax);
-            System.out.println("x/outx " + x + "/" + outx);
             return outx;
         } else {
             double outz = scale(z, this.inputMin, this.inputMax, this.scaledMin, this.scaledMax);
-            //System.out.println("z/outz " + z + "/" + outz);
             return outz;
         }
     }
