@@ -122,7 +122,7 @@ public class NoiseGen
          int iy, int iz, int seed)
    {
       
-      VectorTable vectorTable = new VectorTable();
+      //VectorTable vectorTable = new VectorTable();
       // Randomly generate a gradient vector given the integer coordinates of the
       // input value.  This implementation generates a random number and uses it
       // as an index into a normalized-vector lookup table.
@@ -135,9 +135,12 @@ public class NoiseGen
       vectorIndex ^= (vectorIndex >> SHIFT_NOISE_GEN);
       vectorIndex &= 0xff;
       
-      double xvGradient = vectorTable.getRandomVectors(vectorIndex, 0);
-      double yvGradient = vectorTable.getRandomVectors(vectorIndex, 1);
-      double zvGradient = vectorTable.getRandomVectors(vectorIndex, 2);
+      //double xvGradient = vectorTable.getRandomVectors(vectorIndex, 0);
+      //double yvGradient = vectorTable.getRandomVectors(vectorIndex, 1);
+      //double zvGradient = vectorTable.getRandomVectors(vectorIndex, 2);
+       double xvGradient = VectorTable.getRandomVectors(vectorIndex, 0);
+       double yvGradient = VectorTable.getRandomVectors(vectorIndex, 1);
+       double zvGradient = VectorTable.getRandomVectors(vectorIndex, 2);
       // array size too large when using this original, changed to above for all 3
       // double zvGradient = vectorTable.getRandomVectors(vectorIndex << 2, 2);
 
