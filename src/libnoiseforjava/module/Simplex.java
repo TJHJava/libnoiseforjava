@@ -59,14 +59,29 @@ public class Simplex extends ModuleBase {  // Simplex noise in 2D, 3D and 4D
             49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
             138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180};
     // To remove the need for index wrapping, double the permutation table length
-    private static short perm[] = new short[512];
-    private static short permMod12[] = new short[512];
-    static {
-        for(int i=0; i<512; i++)
-        {
+    private short perm[] = new short[512];
+    private short permMod12[] = new short[512];
+    
+    private double seed = 0;
+
+    public Simplex() {
+        super(0);
+        for(int i=0; i<512; i++) {
             perm[i]=p[i & 255];
             permMod12[i] = (short)(perm[i] % 12);
         }
+    }
+
+    public double getSeed() {
+        return seed;
+    }
+
+    public void setSeed(double seed) {
+        this.seed = seed;
+    }
+
+    public void setSeed(int seed) {
+        this.seed = (double)seed;
     }
 
     // Skewing and unskewing factors for 2, 3, and 4 dimensions
@@ -84,17 +99,20 @@ public class Simplex extends ModuleBase {  // Simplex noise in 2D, 3D and 4D
     }
 
     private static double dot(Grad g, double x, double y) {
-        return g.x*x + g.y*y; }
+        return g.x*x + g.y*y;
+    }
 
     private static double dot(Grad g, double x, double y, double z) {
-        return g.x*x + g.y*y + g.z*z; }
+        return g.x*x + g.y*y + g.z*z;
+    }
 
     private static double dot(Grad g, double x, double y, double z, double w) {
-        return g.x*x + g.y*y + g.z*z + g.w*w; }
+        return g.x*x + g.y*y + g.z*z + g.w*w;
+    }
 
 
     // 2D simplex noise
-    public static double getValue2d(double xin, double yin) {
+    public double getValue2d(double xin, double yin) {
         double n0, n1, n2; // Noise contributions from the three corners
         // Skew the input space to determine which simplex cell we're in
         double s = (xin+yin)*F2; // Hairy factor for 2D
@@ -120,6 +138,7 @@ public class Simplex extends ModuleBase {  // Simplex noise in 2D, 3D and 4D
         // Work out the hashed gradient indices of the three simplex corners
         int ii = i & 255;
         int jj = j & 255;
+
         int gi0 = permMod12[ii+perm[jj]];
         int gi1 = permMod12[ii+i1+perm[jj+j1]];
         int gi2 = permMod12[ii+1+perm[jj+1]];
@@ -152,6 +171,9 @@ public class Simplex extends ModuleBase {  // Simplex noise in 2D, 3D and 4D
     public double getValue(double xin, double yin, double zin) {
         double n0, n1, n2, n3; // Noise contributions from the four corners
         // Skew the input space to determine which simplex cell we're in
+        xin+=(seed + (seed * 7)) % Double.MAX_VALUE;
+        xin+=(seed + (seed * 13)) % Double.MAX_VALUE;
+        xin+=(seed + (seed * 17)) % Double.MAX_VALUE;
         double s = (xin+yin+zin)*F3; // Very nice and simple skew factor for 3D
         int i = fastfloor(xin+s);
         int j = fastfloor(yin+s);
@@ -195,6 +217,7 @@ public class Simplex extends ModuleBase {  // Simplex noise in 2D, 3D and 4D
         int ii = i & 255;
         int jj = j & 255;
         int kk = k & 255;
+
         int gi0 = permMod12[ii+perm[jj+perm[kk]]];
         int gi1 = permMod12[ii+i1+perm[jj+j1+perm[kk+k1]]];
         int gi2 = permMod12[ii+i2+perm[jj+j2+perm[kk+k2]]];
@@ -231,7 +254,7 @@ public class Simplex extends ModuleBase {  // Simplex noise in 2D, 3D and 4D
 
 
     // 4D simplex noise, better simplex rank ordering method 2012-03-09
-    public static double getValue4d(double x, double y, double z, double w) {
+    public double getValue4d(double x, double y, double z, double w) {
 
         double n0, n1, n2, n3, n4; // Noise contributions from the five corners
         // Skew the (x,y,z,w) space to determine which cell of 24 simplices we're in

@@ -134,10 +134,7 @@ public class NoiseGen
       
       vectorIndex ^= (vectorIndex >> SHIFT_NOISE_GEN);
       vectorIndex &= 0xff;
-      
-      //double xvGradient = vectorTable.getRandomVectors(vectorIndex, 0);
-      //double yvGradient = vectorTable.getRandomVectors(vectorIndex, 1);
-      //double zvGradient = vectorTable.getRandomVectors(vectorIndex, 2);
+
        double xvGradient = VectorTable.getRandomVectors(vectorIndex, 0);
        double yvGradient = VectorTable.getRandomVectors(vectorIndex, 1);
        double zvGradient = VectorTable.getRandomVectors(vectorIndex, 2);
@@ -252,8 +249,7 @@ public class NoiseGen
    /// Although you could do a straight cast from double to int32, the
    /// resulting value may differ between platforms.  By using this function,
    /// you ensure that the resulting value is identical between platforms.
-   public static double MakeInt32Range (double n)
-   {
+   public static double MakeInt32Range (double n) {
      if (n >= 1073741824.0)
         return (2.0 * (n % 1073741824.0)) - 1073741824.0;
      else if (n <= -1073741824.0)
