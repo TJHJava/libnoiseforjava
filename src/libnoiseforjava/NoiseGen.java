@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright  2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -122,7 +122,7 @@ public class NoiseGen
          int iy, int iz, int seed)
    {
       
-      VectorTable vectorTable = new VectorTable();
+      //VectorTable vectorTable = new VectorTable();
       // Randomly generate a gradient vector given the integer coordinates of the
       // input value.  This implementation generates a random number and uses it
       // as an index into a normalized-vector lookup table.
@@ -134,10 +134,10 @@ public class NoiseGen
       
       vectorIndex ^= (vectorIndex >> SHIFT_NOISE_GEN);
       vectorIndex &= 0xff;
-      
-      double xvGradient = vectorTable.getRandomVectors(vectorIndex, 0);
-      double yvGradient = vectorTable.getRandomVectors(vectorIndex, 1);
-      double zvGradient = vectorTable.getRandomVectors(vectorIndex, 2);
+
+       double xvGradient = VectorTable.getRandomVectors(vectorIndex, 0);
+       double yvGradient = VectorTable.getRandomVectors(vectorIndex, 1);
+       double zvGradient = VectorTable.getRandomVectors(vectorIndex, 2);
       // array size too large when using this original, changed to above for all 3
       // double zvGradient = vectorTable.getRandomVectors(vectorIndex << 2, 2);
 
@@ -249,8 +249,7 @@ public class NoiseGen
    /// Although you could do a straight cast from double to int32, the
    /// resulting value may differ between platforms.  By using this function,
    /// you ensure that the resulting value is identical between platforms.
-   public static double MakeInt32Range (double n)
-   {
+   public static double MakeInt32Range (double n) {
      if (n >= 1073741824.0)
         return (2.0 * (n % 1073741824.0)) - 1073741824.0;
      else if (n <= -1073741824.0)

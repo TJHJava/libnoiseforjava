@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright  2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -47,6 +47,11 @@ public class Const extends ModuleBase
    {
       super(0);
       this.constValue = DEFAULT_CONST_VALUE;
+   }
+    
+   public Const(double c) {
+       super(0);
+       this.constValue = c;
    }
 
    public double getValue (double x, double y, double z)

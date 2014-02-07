@@ -34,7 +34,7 @@ public class VectorTable
    // Chapter 5 - Implementing Improved Perlin Noise by Ken Perlin,
    // specifically page 76.
   
-   double[][] randomVectors = {
+   private static double[][] randomVectors = {
      {-0.763874, -0.596439, -0.246489, 0.0},
      {0.396055, 0.904518, -0.158073, 0.0},
      {-0.499004, -0.8665, -0.0131631, 0.0},
@@ -293,12 +293,12 @@ public class VectorTable
      {0.0337884, -0.979891, -0.196654, 0.0}
    };
 
-   public VectorTable()
+   private VectorTable()
    {
       
    }
 
-   public double getRandomVectors(int a, int b)
+   public static double getRandomVectors(int a, int b)
    {
       return randomVectors[a][b];
    }
