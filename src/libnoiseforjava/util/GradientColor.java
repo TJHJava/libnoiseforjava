@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright ï¿½ 2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -27,6 +27,8 @@ package libnoiseforjava.util;
 
 import libnoiseforjava.Misc;
 import libnoiseforjava.exception.ExceptionInvalidParam;
+
+import java.awt.*;
 
 public class GradientColor
 {
@@ -63,12 +65,12 @@ public class GradientColor
 
    GradientPoint [] gradientPoints;  
    int gradientPointCount;
-   ColorCafe workingColor;
+   Color workingColor;
 
    public GradientColor()
    {
       gradientPoints = new GradientPoint[1];
-      gradientPoints[0] =  new GradientPoint(0.0, new ColorCafe(0, 0, 0, 0));
+      gradientPoints[0] =  new GradientPoint(0.0, new Color(0, 0, 0, 0));
    }
 
    /// Adds a gradient point to this gradient object.
@@ -81,7 +83,7 @@ public class GradientColor
    /// @throw noise::ExceptionInvalidParam See the precondition.
    ///
    /// It does not matter which order these gradient points are added.
-   public void addGradientPoint (double gradientPos, ColorCafe gradientColor) throws ExceptionInvalidParam
+   public void addGradientPoint (double gradientPos, Color gradientColor) throws ExceptionInvalidParam
    {
       // Find the insertion point for the new gradient point and insert the new
       // gradient point at that insertion point.  The gradient point array will
@@ -137,7 +139,7 @@ public class GradientColor
    /// @param gradientPos The specified position.
    ///
    /// @returns The color at that position.
-   public ColorCafe getColor (double gradientPos)
+   public Color getColor (double gradientPos)
    {
       assert (gradientPointCount >= 2);
 
@@ -172,8 +174,8 @@ public class GradientColor
       double alpha = (gradientPos - input0) / (input1 - input0);
 
       // Now perform the linear interpolation given the alpha value.
-      ColorCafe color0 = gradientPoints[index0].color;
-      ColorCafe color1 = gradientPoints[index1].color;
+      Color color0 = gradientPoints[index0].color;
+      Color color1 = gradientPoints[index1].color;
       workingColor = MiscUtilities.linearInterpColor (color0, color1, (float)alpha);
       return workingColor;
    }
@@ -194,7 +196,7 @@ public class GradientColor
    /// must be sorted by the position, the new gradient point should be
    /// inserted at the position in which the order is still preserved.
    public void insertAtPos (int insertionPos, double gradientPos,
-         ColorCafe gradientColor)
+         Color gradientColor)
    {
       // Make room for the new gradient point at the specified insertion position
       // within the gradient point array.  The insertion position is determined by

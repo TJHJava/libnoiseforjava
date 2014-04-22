@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright ï¿½ 2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -26,6 +26,8 @@
 package libnoiseforjava.util;
 
 import libnoiseforjava.exception.ExceptionInvalidParam;
+
+import java.awt.*;
 
 public class RendererNormalMap
 {
@@ -105,7 +107,7 @@ public class RendererNormalMap
    /// 
    /// The spatial resolution and elevation resolution are determined by
    /// the application.
-   public ColorCafe calcNormalColor (double nc, double nr, double nu,
+   public Color calcNormalColor (double nc, double nr, double nu,
          double bumpHeight)
    {
       // Calculate the surface normal.
@@ -129,7 +131,7 @@ public class RendererNormalMap
       // left as example of what was here in case above conversion doesn't work.
       //zc = (noise::uint8)((noise::uint)((floor)((vzc + 1.0) * 127.5)) & 0xff);
 
-      return new ColorCafe (xc, yc, zc, 255);
+      return new Color (xc, yc, zc, 255);
    }
 
    /// Renders the noise map to the destination image.

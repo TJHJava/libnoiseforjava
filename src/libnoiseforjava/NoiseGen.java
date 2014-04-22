@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright ï¿½ 2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -59,6 +59,8 @@ public class NoiseGen
    static final int Z_NOISE_GEN = 6971;
    static final int SEED_NOISE_GEN = 1013;
    static final int SHIFT_NOISE_GEN = 8;
+
+    private static final VectorTable vectorTable = new VectorTable();
 
    public static double GradientCoherentNoise3D (double x, double y, double z, int seed,
          NoiseQuality noiseQuality)
@@ -121,16 +123,13 @@ public class NoiseGen
    public static double GradientNoise3D (double fx, double fy, double fz, int ix,
          int iy, int iz, int seed)
    {
-      
-      VectorTable vectorTable = new VectorTable();
       // Randomly generate a gradient vector given the integer coordinates of the
       // input value.  This implementation generates a random number and uses it
       // as an index into a normalized-vector lookup table.
       int vectorIndex = (X_NOISE_GEN * ix
             + Y_NOISE_GEN * iy
             + Z_NOISE_GEN * iz
-            + SEED_NOISE_GEN * seed)
-            & 0xffffffff;
+            + SEED_NOISE_GEN * seed);
       
       vectorIndex ^= (vectorIndex >> SHIFT_NOISE_GEN);
       vectorIndex &= 0xff;
