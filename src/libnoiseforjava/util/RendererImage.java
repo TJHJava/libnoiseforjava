@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright ï¿½ 2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -27,6 +27,8 @@ package libnoiseforjava.util;
 
 import libnoiseforjava.Interp;
 import libnoiseforjava.exception.ExceptionInvalidParam;
+
+import java.awt.*;
 
 public class RendererImage
 {
@@ -153,7 +155,7 @@ public class RendererImage
    double lightBrightness;
 
    /// The color of the light source.
-   ColorCafe lightColor;
+   Color lightColor;
 
    /// The contrast between areas in light and areas in shadow.
    double lightContrast;
@@ -194,7 +196,7 @@ public class RendererImage
       isWrapEnabled = false;
       lightAzimuth = 45.0;
       lightBrightness = 1.0;
-      lightColor = new ColorCafe(255, 255, 255, 255);
+      lightColor = new Color(255, 255, 255, 255);
       lightContrast = 1.0;
       lightElev = 45.0;
       lightIntensity = 1.0;
@@ -228,7 +230,7 @@ public class RendererImage
    /// towards the calculated color, and if the alpha value is low, this
    /// object weighs the blend towards the color from the corresponding
    /// pixel in the background image.
-   public void addGradientPoint (double gradientPos, ColorCafe gradientColor) throws ExceptionInvalidParam
+   public void addGradientPoint (double gradientPos, Color gradientColor) throws ExceptionInvalidParam
    {
       gradient.addGradientPoint (gradientPos, gradientColor);
    }
@@ -244,8 +246,8 @@ public class RendererImage
    public void buildGrayscaleGradient () throws ExceptionInvalidParam
    {
       clearGradient ();
-      gradient.addGradientPoint (-1.0, new ColorCafe (  0,   0,   0, 255));
-      gradient.addGradientPoint ( 1.0, new ColorCafe (255, 255, 255, 255));
+      gradient.addGradientPoint (-1.0, new Color (  0,   0,   0, 255));
+      gradient.addGradientPoint ( 1.0, new Color (255, 255, 255, 255));
    }
 
    /// Builds a color gradient suitable for terrain.
@@ -259,15 +261,15 @@ public class RendererImage
    public void buildTerrainGradient () throws ExceptionInvalidParam
    {
       clearGradient ();
-      gradient.addGradientPoint (-1.00, new ColorCafe (  0,   0, 128, 255));
-      gradient.addGradientPoint (-0.20, new ColorCafe ( 32,  64, 128, 255));
-      gradient.addGradientPoint (-0.04, new ColorCafe ( 64,  96, 192, 255));
-      gradient.addGradientPoint (-0.02, new ColorCafe (192, 192, 128, 255));
-      gradient.addGradientPoint ( 0.00, new ColorCafe (  0, 192,   0, 255));
-      gradient.addGradientPoint ( 0.25, new ColorCafe (192, 192,   0, 255));
-      gradient.addGradientPoint ( 0.50, new ColorCafe (160,  96,  64, 255));
-      gradient.addGradientPoint ( 0.75, new ColorCafe (128, 255, 255, 255));
-      gradient.addGradientPoint ( 1.00, new ColorCafe (255, 255, 255, 255));
+      gradient.addGradientPoint (-1.00, new Color (  0,   0, 128, 255));
+      gradient.addGradientPoint (-0.20, new Color ( 32,  64, 128, 255));
+      gradient.addGradientPoint (-0.04, new Color ( 64,  96, 192, 255));
+      gradient.addGradientPoint (-0.02, new Color (192, 192, 128, 255));
+      gradient.addGradientPoint ( 0.00, new Color (  0, 192,   0, 255));
+      gradient.addGradientPoint ( 0.25, new Color (192, 192,   0, 255));
+      gradient.addGradientPoint ( 0.50, new Color (160,  96,  64, 255));
+      gradient.addGradientPoint ( 0.75, new Color (128, 255, 255, 255));
+      gradient.addGradientPoint ( 1.00, new Color (255, 255, 255, 255));
    }
 
    /// Calculates the destination color.
@@ -279,16 +281,16 @@ public class RendererImage
    /// @param lightValue The intensity of the light at that position.
    ///
    /// @returns The destination color.
-   public ColorCafe calcDestColor (ColorCafe sourceColor, ColorCafe backgroundColor,
+   public Color calcDestColor (Color sourceColor, Color backgroundColor,
          double lightValue)
    {
-      double sourceRed   = (double)sourceColor.red   / 255.0;
-      double sourceGreen = (double)sourceColor.green / 255.0;
-      double sourceBlue  = (double)sourceColor.blue  / 255.0;
-      double sourceAlpha = (double)sourceColor.alpha / 255.0;
-      double backgroundRed   = (double)backgroundColor.red   / 255.0;
-      double backgroundGreen = (double)backgroundColor.green / 255.0;
-      double backgroundBlue  = (double)backgroundColor.blue  / 255.0;
+      double sourceRed   = (double)sourceColor.getRed()   / 255.0;
+      double sourceGreen = (double)sourceColor.getGreen() / 255.0;
+      double sourceBlue  = (double)sourceColor.getBlue()  / 255.0;
+      double sourceAlpha = (double)sourceColor.getAlpha() / 255.0;
+      double backgroundRed   = (double)backgroundColor.getRed()   / 255.0;
+      double backgroundGreen = (double)backgroundColor.getGreen() / 255.0;
+      double backgroundBlue  = (double)backgroundColor.getBlue()  / 255.0;
 
       // First, blend the source color to the background color using the alpha
       // of the source color.
@@ -299,9 +301,9 @@ public class RendererImage
       if (isLightEnabled)
       {
          // Now calculate the light color.
-         double lightRed   = lightValue * (double)lightColor.red   / 255.0;
-         double lightGreen = lightValue * (double)lightColor.green / 255.0;
-         double lightBlue  = lightValue * (double)lightColor.blue  / 255.0;
+         double lightRed   = lightValue * (double)lightColor.getRed()   / 255.0;
+         double lightGreen = lightValue * (double)lightColor.getGreen() / 255.0;
+         double lightBlue  = lightValue * (double)lightColor.getBlue()  / 255.0;
 
          // Apply the light color to the new color.
          red   *= lightRed  ;
@@ -319,8 +321,8 @@ public class RendererImage
 
       // Rescale the color channels to the noise::uint8 (0..255) range and return
       // the new color.
-      ColorCafe newColor = new ColorCafe((int)(red * 255.0) & 0xff,(int)(green * 255.0) & 0xff,
-            (int)(blue  * 255.0) & 0xff, Math.max (sourceColor.alpha, backgroundColor.alpha));
+      Color newColor = new Color((int)(red * 255.0) & 0xff,(int)(green * 255.0) & 0xff,
+            (int)(blue  * 255.0) & 0xff, Math.max (sourceColor.getAlpha(), backgroundColor.getAlpha()));
       return newColor;
    }
 
@@ -419,13 +421,13 @@ public class RendererImage
 
       for (int y = 0; y < height; y++)
       {
-         ColorCafe background = new ColorCafe(255, 255, 255, 255);
+         Color background = new Color(255, 255, 255, 255);
 
          for (int x = 0; x < width; x++)
          {
             // Get the color based on the value at the current point in the noise
             // map.
-            ColorCafe destColor = gradient.getColor (sourceNoiseMap.getValue(x,y));
+            Color destColor = gradient.getColor (sourceNoiseMap.getValue(x,y));
 
             // If lighting is enabled, calculate the light intensity based on the
             // rate of change at the current point in the noise map.
@@ -523,7 +525,7 @@ public class RendererImage
             }
 
             // Get the current background color from the background image.
-            ColorCafe backgroundColor = new ColorCafe (255, 255, 255, 255);
+            Color backgroundColor = new Color (255, 255, 255, 255);
             if (backgroundImage != null)
                backgroundColor = backgroundImage.getValue(x, y);
 
@@ -590,7 +592,7 @@ public class RendererImage
    /// Returns the color of the light source.
    ///
    /// @returns The color of the light source.
-   public ColorCafe getLightColor ()
+   public Color getLightColor ()
    {
       return lightColor;
    }
@@ -731,7 +733,7 @@ public class RendererImage
    ///
    /// Make sure the light source is enabled via a call to the
    /// EnableLight() method before calling the Render() method.
-   public void setLightColor (ColorCafe lightColor)
+   public void setLightColor (Color lightColor)
    {
       this.lightColor = lightColor;
    }

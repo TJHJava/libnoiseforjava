@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright ï¿½ 2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -27,6 +27,8 @@ package libnoiseforjava.util;
 
 import libnoiseforjava.exception.ExceptionInvalidParam;
 
+import java.awt.*;
+
 public class ImageCafe
 {
 
@@ -34,7 +36,7 @@ public class ImageCafe
    ///
    /// An image can be used to store a color texture.
    ///
-   /// These color values are of type ColorCafe.
+   /// These color values are of type Color.
    ///
    /// The size (width and height) of the image can be specified during
    /// object construction.
@@ -55,7 +57,7 @@ public class ImageCafe
    ///
 
    /// The Color value used for all positions outside of the image.
-   ColorCafe borderValue;
+   Color borderValue;
 
    /// The current height of the image.
    int height;
@@ -63,14 +65,14 @@ public class ImageCafe
    /// The current width of the image.
    int width;
 
-   /// Array of ColorCafes holding the color values
-   ColorCafe [][] imageCafeColors;
+   /// Array of Colors holding the color values
+   Color [][] imageCafeColors;
 
    public ImageCafe (int width, int height) throws ExceptionInvalidParam
    {
       setSize (width, height);
-      borderValue = new ColorCafe (0, 0, 0, 0);
-      imageCafeColors = new ColorCafe[width][height];
+      borderValue = new Color (0, 0, 0, 0);
+      imageCafeColors = new Color[width][height];
    }
 
    /// Returns a color value from the specified position in the image.
@@ -82,7 +84,7 @@ public class ImageCafe
    ///
    /// This method returns the border value if the coordinates exist
    /// outside of the image.
-   public ColorCafe getValue (int x, int y)
+   public Color getValue (int x, int y)
    {
       if (x >= 0 && x < width && y >= 0 && y < height)
          return imageCafeColors[x][y];
@@ -122,7 +124,7 @@ public class ImageCafe
    ///
    /// This method does nothing if the image is empty or the position is
    /// outside the bounds of the image.
-   public void setValue (int x, int y, ColorCafe value)
+   public void setValue (int x, int y, Color value)
    {
       if (x >= 0 && x < width && y >= 0 && y < height)
          this.imageCafeColors[x][y] = value;
@@ -137,7 +139,7 @@ public class ImageCafe
    ///
    /// All positions outside of the image are assumed to have a common
    /// color value known as the <i>border value</i>.
-   public ColorCafe getBorderValue ()
+   public Color getBorderValue ()
    {
       return borderValue;
    }
@@ -166,7 +168,7 @@ public class ImageCafe
    ///
    /// All positions outside of the image are assumed to have a common
    /// color value known as the <i>border value</i>.
-   public void setBorderValue (ColorCafe borderValue)
+   public void setBorderValue (Color borderValue)
    {
       this.borderValue = borderValue;
    }

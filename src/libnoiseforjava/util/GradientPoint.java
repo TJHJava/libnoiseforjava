@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright ï¿½ 2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -25,6 +25,8 @@
 
 package libnoiseforjava.util;
 
+import java.awt.*;
+
 public class GradientPoint
 {
  /// Defines a point used to build a color gradient.
@@ -38,15 +40,15 @@ public class GradientPoint
    /// objects.
    
    double position;
-   ColorCafe color;
+   Color color;
    
    public GradientPoint()
    {
       position = 0.0;
-      color = new ColorCafe(0,0,0,0);
+      color = new Color(0,0,0,0);
    }
    
-   public GradientPoint(double position, ColorCafe color)
+   public GradientPoint(double position, Color color)
    {
       this.position = position;
       this.color = color;
@@ -57,7 +59,7 @@ public class GradientPoint
       return position;
    }
 
-   public ColorCafe getColor()
+   public Color getColor()
    {
       return color;
    }
@@ -67,7 +69,7 @@ public class GradientPoint
       this.position = position;
    }
 
-   public void setColor(ColorCafe color)
+   public void setColor(Color color)
    {
       this.color = color;
    }

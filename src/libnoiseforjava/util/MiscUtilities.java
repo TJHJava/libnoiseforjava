@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright ï¿½ 2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -25,6 +25,8 @@
 
 package libnoiseforjava.util;
 
+import java.awt.*;
+
 public class MiscUtilities
 {
    
@@ -37,14 +39,14 @@ public class MiscUtilities
    }
 
    // Performs linear interpolation between two colors 
-   public static ColorCafe linearInterpColor (ColorCafe color0, ColorCafe color1,
+   public static Color linearInterpColor (Color color0, Color color1,
      float alpha)
    {
-     ColorCafe color = new ColorCafe(
-           blendChannel (color0.red, color1.red, alpha),
-           blendChannel (color0.green, color1.green, alpha),
-           blendChannel (color0.blue, color1.blue, alpha),
-           blendChannel (color0.alpha, color1.alpha, alpha)
+     Color color = new Color(
+           blendChannel (color0.getRed(), color1.getRed(), alpha),
+           blendChannel (color0.getGreen(), color1.getGreen(), alpha),
+           blendChannel (color0.getBlue(), color1.getBlue(), alpha),
+           blendChannel (color0.getAlpha(), color1.getAlpha(), alpha)
            );
      return color;
    }
