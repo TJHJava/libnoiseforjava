@@ -28,29 +28,40 @@ package libnoiseforjava;
 public class NoiseGen
 {
    
-   /// Enumerates the noise quality.
+   /**
+    * Enumerates the noise quality.
+    * @see #QUALITY_FAST
+    * @see #QUALITY_STD
+    * @see #QUALITY_BEST
+    */
    public enum NoiseQuality
    {
-
-     /// Generates coherent noise quickly.  When a coherent-noise function with
-     /// this quality setting is used to generate a bump-map image, there are
-     /// noticeable "creasing" artifacts in the resulting image.  This is
-     /// because the derivative of that function is discontinuous at integer
-     /// boundaries.
+       
+    /**
+     * Generates coherent noise quickly, when a coherent-noise function with
+     * this quality setting is used to generate a bump-map image, there are
+     * noticeable "creasing" artifacts in the resulting image, this is
+     * because the derivative of that function is discontinuous at integer
+     * boundaries.
+     */
      QUALITY_FAST,
-
-     /// Generates standard-quality coherent noise.  When a coherent-noise
-     /// function with this quality setting is used to generate a bump-map
-     /// image, there are some minor "creasing" artifacts in the resulting
-     /// image.  This is because the second derivative of that function is
-     /// discontinuous at integer boundaries.
+     
+    /**
+     * Generates standard-quality coherent noise, when a coherent-noise
+     * function with this quality setting is used to generate a bump-map
+     * image, there are some minor "creasing" artifacts in the resulting
+     * image, this is because the second derivative of that function is
+     * discontinuous at integer boundaries.
+     */
      QUALITY_STD,
-
-     /// Generates the best-quality coherent noise.  When a coherent-noise
-     /// function with this quality setting is used to generate a bump-map
-     /// image, there are no "creasing" artifacts in the resulting image.  This
-     /// is because the first and second derivatives of that function are
-     /// continuous at integer boundaries.
+     
+     /**
+      * Generates the best-quality coherent noise when a coherent-noise
+      * function with this quality setting is used to generate a bump-map
+      * image, there are no "creasing" artifacts in the resulting image this
+      * is because the first and second derivatives of that function are
+      * continuous at integer boundaries.
+      */
      QUALITY_BEST
    }
 
@@ -232,23 +243,30 @@ public class NoiseGen
       return 1.0 - ((double)IntValueNoise3D (x, y, z, seed) / 1073741824.0);
    }
    
-   /// Modifies a floating-point value so that it can be stored in a
-   /// int32 variable.
-   ///
-   /// @param n A floating-point number.
-   ///
-   /// @returns The modified floating-point number.
-   ///
-   /// This function does not modify @a n.
-   ///
-   /// In libnoise, the noise-generating algorithms are all integer-based;
-   /// they use variables of type int32.  Before calling a noise
-   /// function, pass the @a x, @a y, and @a z coordinates to this function to
-   /// ensure that these coordinates can be cast to a int32 value.
-   ///
-   /// Although you could do a straight cast from double to int32, the
-   /// resulting value may differ between platforms.  By using this function,
-   /// you ensure that the resulting value is identical between platforms.
+   /**
+    * Modifies a floating-point value so that it can be stored in a
+    * int32 variable.
+    * <p>
+    * In libnoise, the noise-generating algorithms are all integer-based,
+    * they use variables of type int32.  Before calling a noise
+    * function, pass the @a x, @a y, and @a z coordinates to 
+    * this function to ensure that these coordinates can be cast
+    * to a int32 value.
+    * Modifies a floating-point value so that it can be stored in a
+    * int32 variable.
+    * </p>
+    * <p>This function does not modify @a n.</p>
+    * <p>
+    * Although you could do a straight cast from double to int32, the
+    * resulting value may differ between platforms.  By using this function,
+    * you ensure that the resulting value is identical between platforms.
+    * Modifies a floating-point value so that it can be stored in a
+    * int32 variable.
+    * </p>
+    * 
+    * @param n A floating-point number.
+    * @return The modified floating-point number.
+    */
    public static double MakeInt32Range (double n) {
      if (n >= 1073741824.0)
         return (2.0 * (n % 1073741824.0)) - 1073741824.0;
