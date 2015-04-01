@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright  2010 Thomas J. Hodge (java port of libnoise)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -27,18 +27,19 @@ package libnoiseforjava;
 
 public class Misc
 {
-   /// Clamps a value onto a clamping range.
-   ///
-   /// @param value The value to clamp.
-   /// @param lowerBound The lower bound of the clamping range.
-   /// @param upperBound The upper bound of the clamping range.
-   ///
-   /// @returns
-   /// - @a value if @a value lies between @a lowerBound and @a upperBound.
-   /// - @a lowerBound if @a value is less than @a lowerBound.
-   /// - @a upperBound if @a value is greater than @a upperBound.
-   ///
-   /// This function does not modify any parameters.
+    
+    /**
+     * Clamps a value onto a clamping range.
+     * This function does not modify any parameters.
+     * 
+     * @param value The value to clamp.
+     * @param lowerBound The lower bound of the clamping range.
+     * @param upperBound The upper bound of the clamping range.
+     * @return 
+     * - {@param value} if lies between {@param lowerBound} and {@param upperBound}. <br>
+     * - {@param lowerBound} if {@param value} is less than {@param lowerBound}.<br>
+     * - {@param upperBound} if {@param value} is greater than {@param upperBound}.<br>
+     */
    public static int ClampValue (int value, int lowerBound, int upperBound)
    {
       if (value < lowerBound)
